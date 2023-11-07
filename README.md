@@ -1,11 +1,4 @@
 ---
-__Advertisement :)__
-
-- __[pica](https://nodeca.github.io/pica/demo/)__ - high quality and fast image
-  resize in browser.
-- __[babelfish](https://github.com/nodeca/babelfish/)__ - developer friendly
-  i18n with plurals support and easy syntax.
-
 You will like those projects!
 
 ---
@@ -134,15 +127,6 @@ Right aligned columns
 | ext    | extension to be used for dest files. |
 
 
-## Links
-
-[link text](http://dev.nodeca.com)
-
-[link with title](http://nodeca.github.io/pica/demo/ "title text!")
-
-Autoconverted link https://github.com/nodeca/pica (enable linkify to see)
-
-
 ## Images
 
 ![Minion](https://octodex.github.com/images/minion.png)
@@ -156,11 +140,6 @@ With a reference later in the document defining the URL location:
 
 [id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
 
-
-## Plugins
-
-The killer feature of `markdown-it` is very effective support of
-[syntax plugins](https://www.npmjs.org/browse/keyword/markdown-it-plugin).
 
 
 ### [Emojies](https://github.com/markdown-it/markdown-it-emoji)
