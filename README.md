@@ -6,4 +6,6 @@
 ##### h5 Heading
 ###### h6 Heading
 
+## Images
 
+![Minion](https://octodex.github.com/images/minion.png)
