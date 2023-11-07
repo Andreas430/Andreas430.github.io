@@ -8,4 +8,4 @@
 
 ## Images
 
-[[https://github.com/Andreas430/Andreas430.github.io/blob/main/images/minion.png|alt=minion]]
+![Minion](images/minion.png)
