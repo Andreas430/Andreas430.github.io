@@ -11,7 +11,10 @@
 ![Minion](images/minion.png)
 
 
-# usmod tempor incidid
+<div style="display: flex; align-items: center;">
+  <img src="images/google.png" alt="Google Logo" width="100" style="margin-right: 20px;">
+  <h1>John Doe</h1>
+</div>
 
 ## usmod tempor incidid
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
