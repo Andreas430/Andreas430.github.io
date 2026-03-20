@@ -578,7 +578,7 @@
         <span class="name-highlight">Project Portfolio</span>
       </h1>
       <p class="hero-tagline">
-        A collection of data science and machine learning projects — from Deep Reinforcement Learning to audio classification and ML from scratch.
+        A collection of data engineering and AI projects — from Databricks Lakehouse platforms and agentic AI systems to Deep Reinforcement Learning and ML from scratch.
       </p>
       <div class="hero-cta">
         <a href="https://github.com/andreas430" class="btn btn-primary" target="_blank" rel="noopener">
@@ -593,20 +593,20 @@
   <!-- STATS BAR -->
   <div id="stats-bar">
     <div>
-      <div class="stat-value">5</div>
-      <div class="stat-label">Public repositories</div>
+      <div class="stat-value">€800K</div>
+      <div class="stat-label">Annual savings from production ML</div>
+    </div>
+    <div>
+      <div class="stat-value">4×</div>
+      <div class="stat-label">Faster lending via AI agent</div>
     </div>
     <div>
       <div class="stat-value">500%</div>
       <div class="stat-label">Human score beaten (DQN Breakout)</div>
     </div>
     <div>
-      <div class="stat-value">41</div>
-      <div class="stat-label">Audio classes classified</div>
-    </div>
-    <div>
-      <div class="stat-value">4</div>
-      <div class="stat-label">ML algorithms built from scratch</div>
+      <div class="stat-value">−60%</div>
+      <div class="stat-label">Storage reduction via Lakehouse migration</div>
     </div>
   </div>
 
@@ -615,10 +615,165 @@
     <div class="section-header">
       <div class="section-label">// portfolio</div>
       <h2 class="section-title">Featured Projects</h2>
-      <p class="section-desc">Research and side projects in machine learning, deep reinforcement learning, and data science.</p>
+      <p class="section-desc">Production data engineering, agentic AI systems, and research projects in ML and deep reinforcement learning.</p>
     </div>
 
     <div class="projects-grid">
+
+      <!-- AGENTIC AI — featured wide card -->
+      <div class="project-card featured">
+        <div class="card-header">
+          <div>
+            <div class="card-icon icon-teal">🤖</div>
+          </div>
+          <div class="card-links">
+            <span class="card-link" style="cursor:default;opacity:0.5;">Production · Rabobank</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="card-subtitle">Production · AI Engineering · Rabobank 2025</div>
+          <div class="card-title">Agentic Credit Analysis AI System</div>
+        </div>
+
+        <div class="featured-inner">
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <p class="card-desc">
+              Piloted and engineered a multi-step AI agent that orchestrates credit document analysis, data retrieval, and decisioning workflows — cutting business lending turnaround by 4×. Built with Python asyncio and integrated with 3rd-party LLMs and internal enterprise data sources.
+            </p>
+            <ul class="card-highlights">
+              <li>Multi-agent orchestration using Python asyncio and type-safe interfaces</li>
+              <li>3rd-party LLM integration (model evaluation, prompt engineering, fallback routing)</li>
+              <li>XGBoost document classifier as a tool within the agent pipeline</li>
+              <li>End-to-end testing framework with agent evaluation metrics</li>
+            </ul>
+            <div class="card-tags">
+              <span class="tag">Python</span>
+              <span class="tag">asyncio</span>
+              <span class="tag">AI Agents</span>
+              <span class="tag">LLMs</span>
+              <span class="tag">XGBoost</span>
+              <span class="tag">Agent Orchestration</span>
+              <span class="tag">Databricks</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div style="font-size:0.75rem;color:var(--text-dim);font-family:'SF Mono','Fira Code',monospace;text-transform:uppercase;letter-spacing:1px;margin-bottom:0.25rem;">Agent pipeline stages</div>
+            <div class="algo-chart" id="agent-chart">
+              <div class="algo-row">
+                <span class="algo-label">Doc Ingestion</span>
+                <div class="algo-bar-wrap">
+                  <div class="algo-bar teal" data-target="100">Parse &amp; extract</div>
+                </div>
+              </div>
+              <div class="algo-row">
+                <span class="algo-label">Classification</span>
+                <div class="algo-bar-wrap">
+                  <div class="algo-bar purple" data-target="85">XGBoost tool</div>
+                </div>
+              </div>
+              <div class="algo-row">
+                <span class="algo-label">LLM Analysis</span>
+                <div class="algo-bar-wrap">
+                  <div class="algo-bar blue" data-target="90">Credit reasoning</div>
+                </div>
+              </div>
+              <div class="algo-row">
+                <span class="algo-label">Decision Output</span>
+                <div class="algo-bar-wrap">
+                  <div class="algo-bar orange" data-target="75">Structured report</div>
+                </div>
+              </div>
+            </div>
+            <div class="card-metrics">
+              <div class="metric">
+                <div class="metric-val">4×</div>
+                <div class="metric-lbl">Faster lending</div>
+              </div>
+              <div class="metric">
+                <div class="metric-val">€800K</div>
+                <div class="metric-lbl">Savings/year</div>
+              </div>
+              <div class="metric">
+                <div class="metric-val">Multi</div>
+                <div class="metric-lbl">Agent steps</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DATABRICKS LAKEHOUSE -->
+      <div class="project-card featured">
+        <div class="card-header">
+          <div>
+            <div class="card-icon icon-purple">🏗️</div>
+          </div>
+          <div class="card-links">
+            <span class="card-link" style="cursor:default;opacity:0.5;">Production · Rabobank</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="card-subtitle">Production · Data Engineering · Rabobank 2023–2025</div>
+          <div class="card-title">Databricks Lakehouse Platform Migration</div>
+        </div>
+
+        <div class="featured-inner">
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <p class="card-desc">
+              Led the migration of Rabobank's Data Solutions to an Azure Databricks Lakehouse following the medallion architecture. Designed scalable ELT pipelines with PySpark, built curated dbt models and semantic layers, and implemented a full data governance framework — cutting delivery time by 40% and storage by 60%.
+            </p>
+            <ul class="card-highlights">
+              <li>Designed bronze/silver/gold medallion layers with Delta Lake on Azure Data Lake Storage</li>
+              <li>Built dbt models with lineage tracking, automated testing, and access controls</li>
+              <li>PySpark ELT pipelines for semi-annual data releases — automated from 2 months to under 1 day</li>
+              <li>Real-time Databricks dashboards for data quality monitoring and governance</li>
+            </ul>
+            <div class="card-tags">
+              <span class="tag">Databricks</span>
+              <span class="tag">dbt</span>
+              <span class="tag">PySpark</span>
+              <span class="tag">Delta Lake</span>
+              <span class="tag">Azure Data Lake</span>
+              <span class="tag">ELT Pipelines</span>
+              <span class="tag">Medallion Architecture</span>
+              <span class="tag">Data Governance</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div style="font-size:0.75rem;color:var(--text-dim);font-family:'SF Mono','Fira Code',monospace;text-transform:uppercase;letter-spacing:1px;margin-bottom:0.25rem;">Lakehouse layer architecture</div>
+            <div style="display:flex;flex-direction:column;gap:0.5rem;">
+              <div style="background:var(--bg3);border-radius:8px;padding:0.75rem 1rem;border-left:3px solid rgba(255,140,0,0.7);">
+                <div style="font-size:0.8rem;font-weight:600;color:var(--text);">🥇 Gold — Curated</div>
+                <div style="font-size:0.72rem;color:var(--text-dim);">dbt semantic models · BI-ready · KPIs</div>
+              </div>
+              <div style="background:var(--bg3);border-radius:8px;padding:0.75rem 1rem;border-left:3px solid rgba(0,168,255,0.7);">
+                <div style="font-size:0.8rem;font-weight:600;color:var(--text);">🥈 Silver — Cleansed</div>
+                <div style="font-size:0.72rem;color:var(--text-dim);">PySpark transforms · quality checks · lineage</div>
+              </div>
+              <div style="background:var(--bg3);border-radius:8px;padding:0.75rem 1rem;border-left:3px solid rgba(124,58,237,0.7);">
+                <div style="font-size:0.8rem;font-weight:600;color:var(--text);">🥉 Bronze — Raw</div>
+                <div style="font-size:0.72rem;color:var(--text-dim);">Delta Lake ingestion · schema enforcement</div>
+              </div>
+            </div>
+            <div class="card-metrics">
+              <div class="metric">
+                <div class="metric-val">−40%</div>
+                <div class="metric-lbl">Delivery time</div>
+              </div>
+              <div class="metric">
+                <div class="metric-val">−60%</div>
+                <div class="metric-lbl">Storage cost</div>
+              </div>
+              <div class="metric">
+                <div class="metric-val">&lt;1 day</div>
+                <div class="metric-lbl">Was 2 months</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- TETRIS — featured wide card -->
       <div class="project-card featured">
@@ -929,7 +1084,7 @@
     <div class="section-label">// let's connect</div>
     <h2 class="section-title" style="margin-bottom:1rem;">Interested in working together?</h2>
     <p class="section-desc" style="margin:0 auto 2rem;">
-      I'm always open to interesting data engineering and ML projects. Check out my full CV or reach out directly.
+      I'm always open to interesting data engineering and AI engineering roles. Check out my full CV or reach out directly.
     </p>
     <div class="hero-cta" style="justify-content:center;">
       <a href="index.html" class="btn btn-primary">View Full CV</a>
@@ -955,7 +1110,7 @@
       });
     }, { threshold: 0.3 });
 
-    document.querySelectorAll('#tetris-chart, #breakout-chart').forEach(el => barObserver.observe(el));
+    document.querySelectorAll('#agent-chart, #tetris-chart, #breakout-chart').forEach(el => barObserver.observe(el));
 
     // Generate waveform bars
     const waveform = document.getElementById('waveform');
