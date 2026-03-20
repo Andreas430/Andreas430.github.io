@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Andreas Kafkalias — Data Scientist &amp; DevOps</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --bg2: #161b22;
+      --bg3: #21262d;
+      --border: #30363d;
+      --accent: #00d4aa;
+      --accent2: #7c3aed;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --text-dim: #6e7681;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13, 17, 23, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,212,170,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(124,58,237,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(48,54,61,0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(48,54,61,0.3) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 800px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(0,212,170,0.1);
+      border: 1px solid rgba(0,212,170,0.25);
+      color: var(--accent);
+      font-size: 0.8rem;
+      padding: 0.3rem 0.9rem;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-badge .dot {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+      letter-spacing: -1px;
+    }
+
+    .name-highlight {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-title {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: var(--text-dim);
+      font-style: italic;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .chip {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 6px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.7rem 1.6rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0d1117;
+    }
+
+    .btn-primary:hover {
+      background: #00bfa0;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(0,212,170,0.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      padding: 6rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      letter-spacing: -0.5px;
+    }
+
+    .section-divider {
+      width: 40px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px;
+      margin-bottom: 3rem;
+    }
+
+    /* ─── STATS ─── */
+    #stats {
+      padding: 2rem;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stats-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* ─── EXPERIENCE ─── */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent), var(--accent2), transparent);
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 3rem;
+      padding-left: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s, transform 0.5s;
+    }
+
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2.4rem;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 0 3px rgba(0,212,170,0.2);
+    }
+
+    .timeline-period {
+      font-size: 0.78rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .timeline-role {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .timeline-company {
+      font-size: 0.9rem;
+      color: var(--accent2);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .timeline-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .timeline-bullets li {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .timeline-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.75rem;
+      top: 2px;
+    }
+
+    .company-group { padding-left: 1.5rem; }
+
+    .company-dot {
+      background: var(--accent2) !important;
+      width: 14px !important;
+      height: 14px !important;
+      left: -2.5rem !important;
+      box-shadow: 0 0 0 3px rgba(124,58,237,0.2) !important;
+    }
+
+    .company-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .company-name {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--accent2);
+    }
+
+    .company-tenure {
+      font-size: 0.75rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: var(--text-dim);
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .company-roles {
+      border-left: 2px solid rgba(124,58,237,0.3);
+      padding-left: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    .role-block { position: relative; }
+
+    .role-block::before {
+      content: '';
+      position: absolute;
+      left: -1.4rem;
+      top: 8px;
+      width: 8px;
+      height: 1px;
+      background: rgba(124,58,237,0.3);
+    }
+
+    .impact-tag {
+      display: inline-block;
+      background: rgba(0,212,170,0.1);
+      border: 1px solid rgba(0,212,170,0.2);
+      color: var(--accent);
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* ─── SKILLS ─── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .skill-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .skill-card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .skill-card-title {
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .skill-tag {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 5px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+
+    /* ─── EDUCATION ─── */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .edu-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+
+    .edu-card:hover { border-color: var(--accent2); }
+
+    .edu-badge {
+      display: inline-block;
+      background: rgba(124,58,237,0.1);
+      border: 1px solid rgba(124,58,237,0.25);
+      color: var(--accent2);
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .edu-degree {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    .edu-school {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .edu-honor {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* certifications */
+    .cert-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .cert-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.9rem 1.2rem;
+      transition: border-color 0.2s, transform 0.2s;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .cert-item:hover {
+      border-color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    .cert-icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .cert-name {
+      font-size: 0.9rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ─── ABOUT / PERSONAL ─── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; }
+    }
+
+    .about-text {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    .about-text strong { color: var(--text); }
+
+    .interests {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .interest-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .interest-emoji {
+      font-size: 1.2rem;
+      width: 2rem;
+      text-align: center;
+    }
+
+    /* ─── CONTACT ─── */
+    #contact {
+      text-align: center;
+    }
+
+    .contact-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 3rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.2s;
+      font-size: 0.9rem;
+    }
+
+    .contact-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    .contact-link-icon {
+      font-size: 1.2rem;
+      width: 1.5rem;
+      text-align: center;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 0.82rem;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 600px) {
+      nav { padding: 0 1rem; }
+      .nav-links { gap: 1rem; }
+      section { padding: 4rem 1rem; }
+      .timeline { padding-left: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">AK</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="projects.html" style="color:var(--accent);">Projects</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="grid-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Available for opportunities
+      </div>
+      <h1>
+        Hi, I'm<br />
+        <span class="name-highlight">Andreas Kafkalias</span>
+      </h1>
+      <p class="hero-title">Data Scientist · Software Developer · DevOps Engineer</p>
+      <p class="hero-tagline">Building production-grade ML systems at the intersection of data science, engineering, and real-world impact.</p>
+      <div class="hero-chips">
+        <span class="chip">Python</span>
+        <span class="chip">SQL</span>
+        <span class="chip">Databricks</span>
+        <span class="chip">Kubernetes</span>
+        <span class="chip">Azure</span>
+        <span class="chip">Git</span>
+        <span class="chip">Linux/Unix</span>
+        <span class="chip">LLMs</span>
+      </div>
+      <div class="hero-cta">
+        <a href="#experience" class="btn btn-primary">View My Work</a>
+        <a href="projects.html" class="btn btn-secondary">Projects</a>
+        <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div id="stats">
+    <div class="stats-grid">
+      <div>
+        <div class="stat-value">€800K</div>
+        <div class="stat-label">Annual savings driven by ML model</div>
+      </div>
+      <div>
+        <div class="stat-value">3,000+</div>
+        <div class="stat-label">Hours of manual work automated per year</div>
+      </div>
+      <div>
+        <div class="stat-value">40%</div>
+        <div class="stat-label">Reduction in production delivery time</div>
+      </div>
+      <div>
+        <div class="stat-value">99.99%</div>
+        <div class="stat-label">Database availability maintained</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">About Me</div>
+    <h2 class="section-title">Who I Am</h2>
+    <div class="section-divider"></div>
+    <div class="about-grid">
+      <div>
+        <p class="about-text">
+          I'm a <strong>Data Scientist and DevOps Engineer</strong> based in <strong>Utrecht, Netherlands</strong>,
+          with a background spanning machine learning, data engineering, infrastructure, and research.
+        </p>
+        <br />
+        <p class="about-text">
+          I hold an <strong>M.Sc. in Data Science with Distinction</strong> from the University of Bath
+          and a <strong>BEng in Mechanical Engineering with First Class Honours</strong> from the University of Nottingham.
+          I hold certifications in Kubernetes (CKA &amp; CKAD), Azure (DP-100, AZ-900), and AWS.
+        </p>
+        <br />
+        <p class="about-text">
+          Whether I'm building XGBoost churn models that save <strong>€800K/year</strong>,
+          piloting GenAI classifiers, or mentoring junior engineers, I bring the same energy:
+          curiosity, craft, and a passion for impact.
+        </p>
+      </div>
+      <div>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">When I'm not coding</p>
+        <div class="interests">
+          <div class="interest-item">
+            <span class="interest-emoji">🏓</span>
+            <span>Table tennis — competitive at heart</span>
+          </div>
+          <div class="interest-item">
+            <span class="interest-emoji">📚</span>
+            <span>Fantasy &amp; Adventure series</span>
+          </div>
+          <div class="interest-item">
+            <span class="interest-emoji">🤖</span>
+            <span>Exploring the LLM frontier</span>
+          </div>
+          <div class="interest-item">
+            <span class="interest-emoji">✈️</span>
+            <span>Travelling and discovering new places</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label">Career</div>
+    <h2 class="section-title">Experience</h2>
+    <div class="section-divider"></div>
+    <div class="timeline">
+
+      <!-- Rabobank group -->
+      <div class="timeline-item company-group">
+        <div class="timeline-dot company-dot"></div>
+        <div class="company-header">
+          <span class="company-name">Rabobank</span>
+          <span class="company-tenure">2023 — Present</span>
+        </div>
+        <div class="company-roles">
+          <div class="role-block">
+            <div class="timeline-period">2025 — Present</div>
+            <div class="timeline-role">Data Scientist</div>
+            <ul class="timeline-bullets">
+              <li>
+                Piloted and key scientist/engineer on an <strong>agentic credit analysis AI agent</strong> targeting
+                &nbsp;<span class="impact-tag">4× faster business lending</span>
+              </li>
+              <li>
+                Developed <strong>XGBoost models</strong> for document classification and churn prediction for <strong>SmartPay</strong> customers
+                &nbsp;<span class="impact-tag">saving €800K/year</span>
+              </li>
+              <li>Mentoring junior colleagues 4 hrs/week in technical skills and Databricks-based data engineering</li>
+            </ul>
+          </div>
+          <div class="role-block">
+            <div class="timeline-period">2023 — 2025</div>
+            <div class="timeline-role">Data Engineer</div>
+            <ul class="timeline-bullets">
+              <li>Led migration of Data Solutions to <strong>Azure Databricks &amp; Data Lake Storage</strong></li>
+              <li>
+                Refactored codebase
+                &nbsp;<span class="impact-tag">−40% delivery time</span>
+                &nbsp;<span class="impact-tag">−60% storage</span>
+              </li>
+              <li>Developed Python packages and Databricks real-time dashboards for data quality checks</li>
+              <li>
+                Automated semi-annual data releases
+                &nbsp;<span class="impact-tag">2 months → &lt;1 day</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">2021 — 2023</div>
+        <div class="timeline-role">Machine Learning Research Associate</div>
+        <div class="timeline-company">CYENS Centre of Excellence</div>
+        <ul class="timeline-bullets">
+          <li>Built state-of-the-art <strong>Deep Learning / Computer Vision</strong> models (LSTM, CNNs) with Scikit-learn &amp; TensorFlow</li>
+          <li>Authored and presented papers at <strong>AIAI 2022</strong> and <strong>CICM</strong> conferences</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">2021 — 2023</div>
+        <div class="timeline-role">DevOps Engineer (Infra DBA)</div>
+        <div class="timeline-company">Amdocs</div>
+        <ul class="timeline-bullets">
+          <li>
+            Managed Oracle DB &amp; PostgreSQL end-to-end
+            &nbsp;<span class="impact-tag">99.99% uptime</span>
+          </li>
+          <li>Deployed containerised applications using <strong>Docker &amp; Kubernetes</strong></li>
+          <li>Championed CI/CD best practices using <strong>Git, Python &amp; Bash</strong></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">Toolkit</div>
+    <h2 class="section-title">Skills</h2>
+    <div class="section-divider"></div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-icon">🧠</div>
+        <div class="skill-card-title">Data Science &amp; ML</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">XGBoost</span>
+          <span class="skill-tag">TensorFlow</span>
+          <span class="skill-tag">Scikit-learn</span>
+          <span class="skill-tag">LSTMs</span>
+          <span class="skill-tag">CNNs</span>
+          <span class="skill-tag">LLMs</span>
+          <span class="skill-tag">GenAI</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🗄️</div>
+        <div class="skill-card-title">Data Engineering</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Databricks</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Azure Data Lake</span>
+          <span class="skill-tag">PySpark</span>
+          <span class="skill-tag">ETL Pipelines</span>
+          <span class="skill-tag">Data Quality</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">⚙️</div>
+        <div class="skill-card-title">DevOps &amp; Infrastructure</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Kubernetes</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">CI/CD</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Linux/Unix</span>
+          <span class="skill-tag">Bash</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">☁️</div>
+        <div class="skill-card-title">Cloud &amp; Databases</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Azure</span>
+          <span class="skill-tag">AWS</span>
+          <span class="skill-tag">Oracle DB</span>
+          <span class="skill-tag">PostgreSQL</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🔬</div>
+        <div class="skill-card-title">Research</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Computer Vision</span>
+          <span class="skill-tag">Image Classification</span>
+          <span class="skill-tag">Paper Writing</span>
+          <span class="skill-tag">Conference Presenting</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-icon">🤝</div>
+        <div class="skill-card-title">Leadership</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Mentoring</span>
+          <span class="skill-tag">Technical Coaching</span>
+          <span class="skill-tag">Cross-team Collaboration</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-label">Background</div>
+    <h2 class="section-title">Education &amp; Certifications</h2>
+    <div class="section-divider"></div>
+
+    <div class="edu-grid">
+      <div class="edu-card">
+        <span class="edu-badge">2020 – 2021</span>
+        <div class="edu-degree">M.Sc. Data Science</div>
+        <div class="edu-school">University of Bath</div>
+        <div class="edu-honor">✦ Distinction</div>
+      </div>
+      <div class="edu-card">
+        <span class="edu-badge">2017 – 2020</span>
+        <div class="edu-degree">BEng Mechanical Engineering</div>
+        <div class="edu-school">University of Nottingham</div>
+        <div class="edu-honor">✦ First Class Honours</div>
+      </div>
+    </div>
+
+    <div class="cert-list">
+      <a class="cert-item" href="https://ti-user-certificates.s3.amazonaws.com/e0df7fbf-a057-42af-8a1f-590912be5460/c8cc4e75-a4a4-436e-8a89-0cd419794ea1-andreas-kafkalias-677b115f-387a-42e4-b96e-5368df32533f-certificate.pdf" target="_blank" rel="noopener">
+        <span class="cert-icon">🏅</span>
+        <span class="cert-name">Certified Kubernetes Administrator (CKA)</span>
+        <span style="margin-left:auto; font-size:0.75rem; color:var(--text-dim);">↗</span>
+      </a>
+      <a class="cert-item" href="https://ti-user-certificates.s3.amazonaws.com/e0df7fbf-a057-42af-8a1f-590912be5460/c8cc4e75-a4a4-436e-8a89-0cd419794ea1-andreas-kafkalias-f0bc5997-44c0-4c41-a35b-d04ae92b9c32-certificate.pdf" target="_blank" rel="noopener">
+        <span class="cert-icon">🏅</span>
+        <span class="cert-name">Certified Kubernetes Application Developer (CKAD)</span>
+        <span style="margin-left:auto; font-size:0.75rem; color:var(--text-dim);">↗</span>
+      </a>
+      <a class="cert-item" href="https://www.credly.com/badges/cc6de611-a7b6-4966-b173-d79352aec574/public_url" target="_blank" rel="noopener">
+        <span class="cert-icon">☁️</span>
+        <span class="cert-name">Azure Data Scientist Associate (DP-100)</span>
+        <span style="margin-left:auto; font-size:0.75rem; color:var(--text-dim);">↗</span>
+      </a>
+      <a class="cert-item" href="https://www.credly.com/badges/0aace505-96e7-45f2-bf41-17e19a9743ce/public_url" target="_blank" rel="noopener">
+        <span class="cert-icon">☁️</span>
+        <span class="cert-name">Azure Fundamentals (AZ-900)</span>
+        <span style="margin-left:auto; font-size:0.75rem; color:var(--text-dim);">↗</span>
+      </a>
+      <a class="cert-item" href="https://www.credly.com/badges/9aa269ec-063e-4704-bc92-c8169fec746e/public_url" target="_blank" rel="noopener">
+        <span class="cert-icon">☁️</span>
+        <span class="cert-name">AWS Cloud Practitioner</span>
+        <span style="margin-left:auto; font-size:0.75rem; color:var(--text-dim);">↗</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">Let's Connect</div>
+    <h2 class="section-title">Get in Touch</h2>
+    <div class="section-divider" style="margin: 1rem auto 3rem;"></div>
+    <div class="contact-card">
+      <p style="color: var(--text-muted); margin-bottom: 0.5rem;">
+        Open to interesting roles, collaborations, or just a good conversation about data &amp; tech.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:antreaskafkalias7@gmail.com" class="contact-link">
+          <span class="contact-link-icon">✉️</span>
+          <span>antreaskafkalias7@gmail.com</span>
+        </a>
+        <a href="tel:+310627285933" class="contact-link">
+          <span class="contact-link-icon">📞</span>
+          <span>(+31) 06 27 28 59 33</span>
+        </a>
+        <a href="https://github.com/andreas430" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-link-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          </span>
+          <span>github.com/andreas430</span>
+        </a>
+        <a href="https://www.linkedin.com/in/andreas-kafkalias/" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-link-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </span>
+          <span>linkedin.com/in/andreas-kafkalias</span>
+        </a>
+        <a href="#" class="contact-link">
+          <span class="contact-link-icon">📍</span>
+          <span>Utrecht, Netherlands</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Built with care · Andreas Kafkalias © 2026</p>
+  </footer>
+
+  <script>
+    // Intersection observer for timeline animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 100);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.timeline-item').forEach(el => observer.observe(el));
+
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        if (window.scrollY >= section.offsetTop - 100) {
+          current = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(link => {
+        link.style.color = link.getAttribute('href') === `#${current}`
+          ? 'var(--text)'
+          : 'var(--text-muted)';
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Andreas Kafkalias — Projects</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --bg2: #161b22;
+      --bg3: #21262d;
+      --border: #30363d;
+      --accent: #00d4aa;
+      --accent2: #7c3aed;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --text-dim: #6e7681;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13, 17, 23, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--accent); }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 52vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 30% 50%, rgba(0,212,170,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 80% 40%, rgba(124,58,237,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(48,54,61,0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(48,54,61,0.3) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    }
+
+    .hero-content { position: relative; max-width: 700px; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(0,212,170,0.08);
+      border: 1px solid rgba(0,212,170,0.2);
+      border-radius: 100px;
+      padding: 0.35rem 1rem;
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.3px;
+    }
+
+    .hero-badge .dot {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      letter-spacing: -0.5px;
+    }
+
+    .name-highlight {
+      background: linear-gradient(135deg, var(--accent) 0%, #00a8ff 50%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-tagline {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto 2rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0d1117;
+    }
+
+    .btn-primary:hover {
+      background: #00bfa0;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(0,212,170,0.3);
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ─── STATS BAR ─── */
+    #stats-bar {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
+    /* ─── SECTION ─── */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto;
+      font-size: 0.95rem;
+    }
+
+    /* ─── PROJECT CARDS ─── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .project-card:hover {
+      border-color: rgba(0,212,170,0.35);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+    .project-card:hover::before { opacity: 1; }
+
+    .project-card.featured {
+      grid-column: span 2;
+    }
+
+    @media (max-width: 780px) {
+      .project-card.featured { grid-column: span 1; }
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .card-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .icon-teal { background: rgba(0,212,170,0.12); }
+    .icon-purple { background: rgba(124,58,237,0.12); }
+    .icon-blue { background: rgba(0,168,255,0.12); }
+    .icon-orange { background: rgba(255,140,0,0.12); }
+    .icon-pink { background: rgba(255,83,112,0.12); }
+
+    .card-links {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .card-link {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      padding: 0.3rem 0.65rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    .card-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.1rem;
+    }
+
+    .card-subtitle {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ─── HIGHLIGHTS ─── */
+    .card-highlights {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .card-highlights li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .card-highlights li::before {
+      content: '▹';
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    /* ─── METRICS ─── */
+    .card-metrics {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .metric {
+      flex: 1;
+      min-width: 100px;
+      background: var(--bg3);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      text-align: center;
+    }
+
+    .metric-val {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .metric-lbl {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      margin-top: 0.15rem;
+    }
+
+    /* ─── TECH TAGS ─── */
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: auto;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+    }
+
+    /* ─── FEATURED LAYOUT ─── */
+    .featured-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    @media (max-width: 640px) {
+      .featured-inner { grid-template-columns: 1fr; }
+    }
+
+    /* ─── VISUAL: Algorithm comparison bar chart ─── */
+    .algo-chart {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .algo-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .algo-label {
+      font-size: 0.75rem;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: var(--text-muted);
+      min-width: 110px;
+      white-space: nowrap;
+    }
+
+    .algo-bar-wrap {
+      flex: 1;
+      background: var(--bg3);
+      border-radius: 4px;
+      height: 22px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .algo-bar {
+      height: 100%;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      padding-left: 0.5rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #0d1117;
+      transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 0;
+    }
+
+    .algo-bar.teal { background: linear-gradient(90deg, var(--accent), #00a8ff); }
+    .algo-bar.purple { background: linear-gradient(90deg, var(--accent2), #a855f7); }
+    .algo-bar.blue { background: linear-gradient(90deg, #00a8ff, #0080ff); }
+    .algo-bar.orange { background: linear-gradient(90deg, #ff8c00, #ff5500); }
+
+    /* ─── VISUAL: audio waveform ─── */
+    .waveform {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      height: 60px;
+      padding: 0.5rem 0;
+    }
+
+    .wave-bar {
+      width: 4px;
+      border-radius: 2px;
+      background: linear-gradient(to top, var(--accent2), var(--accent));
+      animation: wave 1.4s ease-in-out infinite;
+    }
+
+    @keyframes wave {
+      0%, 100% { transform: scaleY(0.3); }
+      50% { transform: scaleY(1); }
+    }
+
+    /* ─── VISUAL: network / RL grid ─── */
+    .rl-vis {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 3px;
+      aspect-ratio: 2 / 1;
+    }
+
+    .rl-cell {
+      border-radius: 2px;
+      transition: opacity 0.3s;
+    }
+
+    /* ─── DIVIDER ─── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 600px) {
+      nav { padding: 0 1rem; }
+      .nav-links { gap: 1rem; }
+      section { padding: 4rem 1rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">AK</a>
+    <ul class="nav-links">
+      <li><a href="index.html">CV</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="grid-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="dot"></span>
+        Open Source · Research · Production
+      </div>
+      <h1>
+        <span class="name-highlight">Project Portfolio</span>
+      </h1>
+      <p class="hero-tagline">
+        A collection of data science and machine learning projects — from Deep Reinforcement Learning to audio classification and ML from scratch.
+      </p>
+      <div class="hero-cta">
+        <a href="https://github.com/andreas430" class="btn btn-primary" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          View on GitHub
+        </a>
+        <a href="index.html" class="btn btn-secondary">← Back to CV</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div id="stats-bar">
+    <div>
+      <div class="stat-value">5</div>
+      <div class="stat-label">Public repositories</div>
+    </div>
+    <div>
+      <div class="stat-value">500%</div>
+      <div class="stat-label">Human score beaten (DQN Breakout)</div>
+    </div>
+    <div>
+      <div class="stat-value">41</div>
+      <div class="stat-label">Audio classes classified</div>
+    </div>
+    <div>
+      <div class="stat-value">4</div>
+      <div class="stat-label">ML algorithms built from scratch</div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-header">
+      <div class="section-label">// portfolio</div>
+      <h2 class="section-title">Featured Projects</h2>
+      <p class="section-desc">Research and side projects in machine learning, deep reinforcement learning, and data science.</p>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- TETRIS — featured wide card -->
+      <div class="project-card featured">
+        <div class="card-header">
+          <div>
+            <div class="card-icon icon-teal">🎮</div>
+          </div>
+          <div class="card-links">
+            <a href="https://github.com/andreas430/Tetris" class="card-link" target="_blank" rel="noopener">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <div class="card-subtitle">M.Sc. Thesis · Deep Reinforcement Learning</div>
+          <div class="card-title">Perfecting Tetris with Deep RL</div>
+        </div>
+
+        <div class="featured-inner">
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <p class="card-desc">
+              MSc thesis project exploring whether model-free deep reinforcement learning can master Tetris. Compared value-based (DQN) against policy-based (PPO) approaches across multiple board sizes and state representations.
+            </p>
+            <ul class="card-highlights">
+              <li>DQN achieved >2,000 lines per episode on 8×6 boards</li>
+              <li>PPO cleared max simultaneous lines on smaller boards</li>
+              <li>Explored 4-feature, 12-feature, full-board &amp; "glimpse" state representations</li>
+              <li>Value-based methods showed superior generalization to larger boards</li>
+            </ul>
+            <div class="card-tags">
+              <span class="tag">Python</span>
+              <span class="tag">PyTorch</span>
+              <span class="tag">DQN</span>
+              <span class="tag">PPO</span>
+              <span class="tag">OpenAI Gym</span>
+              <span class="tag">Reinforcement Learning</span>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            <div style="font-size:0.75rem;color:var(--text-dim);font-family:'SF Mono','Fira Code',monospace;text-transform:uppercase;letter-spacing:1px;margin-bottom:0.25rem;">Lines cleared per episode (8×6 board)</div>
+            <div class="algo-chart" id="tetris-chart">
+              <div class="algo-row">
+                <span class="algo-label">DQN (8×6)</span>
+                <div class="algo-bar-wrap">
+                  <div class="algo-bar teal" data-target="95">2,000+</div>
+                </div>
+              </div>
+              <div class="algo-row">
+                <span class="algo-label">PPO (8×6)</span>
+                <div class="algo-bar-wrap">
+                  <div class="algo-bar purple" data-target="50">~1,000</div>
+                </div>
+              </div>
+              <div class="algo-row">
+                <span class="algo-label">DQN (20×10)</span>
+                <div class="algo-bar-wrap">
+                  <div class="algo-bar blue" data-target="15">10+</div>
+                </div>
+              </div>
+              <div class="algo-row">
+                <span class="algo-label">PPO (20×10)</span>
+                <div class="algo-bar-wrap">
+                  <div class="algo-bar orange" data-target="5">&lt;10</div>
+                </div>
+              </div>
+            </div>
+            <div class="card-metrics">
+              <div class="metric">
+                <div class="metric-val">DQN</div>
+                <div class="metric-lbl">Best scaling</div>
+              </div>
+              <div class="metric">
+                <div class="metric-val">2K+</div>
+                <div class="metric-lbl">Lines / episode</div>
+              </div>
+              <div class="metric">
+                <div class="metric-val">4</div>
+                <div class="metric-lbl">State repr. tested</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BREAKOUT DQN -->
+      <div class="project-card">
+        <div class="card-header">
+          <div>
+            <div class="card-icon icon-purple">🕹️</div>
+          </div>
+          <div class="card-links">
+            <a href="https://github.com/andreas430/Breakout_DQN" class="card-link" target="_blank" rel="noopener">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <div class="card-subtitle">University of Bath · Deep Q-Network</div>
+          <div class="card-title">Atari Breakout — DQN Agent</div>
+        </div>
+
+        <p class="card-desc">
+          A Deep Q-Network agent trained to play Atari Breakout from raw pixel input. Inspired by DeepMind's landmark paper, the agent learns to play from 260×160 RGB frames alone, with no game-specific features.
+        </p>
+
+        <ul class="card-highlights">
+          <li>Surpassed average human score by <strong style="color:var(--accent)">500%</strong></li>
+          <li>Achieves near-perfect score on best runs</li>
+          <li>Trained entirely from raw pixel input (260×160 RGB)</li>
+          <li>CNN processes visual frames → Q-values for 4 actions</li>
+        </ul>
+
+        <!-- Visual: score comparison bar -->
+        <div style="margin-top:0.5rem;">
+          <div style="font-size:0.72rem;color:var(--text-dim);font-family:'SF Mono','Fira Code',monospace;margin-bottom:0.5rem;">SCORE COMPARISON</div>
+          <div class="algo-chart" id="breakout-chart">
+            <div class="algo-row">
+              <span class="algo-label" style="min-width:80px;">DQN Agent</span>
+              <div class="algo-bar-wrap">
+                <div class="algo-bar teal" data-target="92">500%+ human</div>
+              </div>
+            </div>
+            <div class="algo-row">
+              <span class="algo-label" style="min-width:80px;">Avg. Human</span>
+              <div class="algo-bar-wrap">
+                <div class="algo-bar orange" data-target="15">baseline</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-tags" style="margin-top:0.5rem;">
+          <span class="tag">Python</span>
+          <span class="tag">PyTorch</span>
+          <span class="tag">DQN</span>
+          <span class="tag">CNN</span>
+          <span class="tag">OpenAI Gym</span>
+          <span class="tag">Atari</span>
+        </div>
+      </div>
+
+      <!-- AUDIO CLASSIFICATION -->
+      <div class="project-card">
+        <div class="card-header">
+          <div>
+            <div class="card-icon icon-blue">🔊</div>
+          </div>
+          <div class="card-links">
+            <a href="https://github.com/andreas430/Audio-Classification-Deep-Learning" class="card-link" target="_blank" rel="noopener">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <div class="card-subtitle">University of Bath · Computer Vision & Audio</div>
+          <div class="card-title">Audio Classification with Deep Learning</div>
+        </div>
+
+        <p class="card-desc">
+          Multi-class audio classification across 41 sound categories using convolutional architectures. Explored a custom CNN and transfer learning via ResNet50 for spectrogram-based audio recognition.
+        </p>
+
+        <!-- Animated waveform visual -->
+        <div class="waveform" id="waveform">
+          <!-- generated by JS -->
+        </div>
+
+        <ul class="card-highlights">
+          <li>Classified 41 distinct audio classes</li>
+          <li>Compared custom CNN vs. ResNet50 transfer learning</li>
+          <li>Audio converted to mel-spectrograms for visual CNN input</li>
+          <li>Collaborative research project (University of Bath, 2021)</li>
+        </ul>
+
+        <div class="card-tags">
+          <span class="tag">Python</span>
+          <span class="tag">TensorFlow/Keras</span>
+          <span class="tag">CNN</span>
+          <span class="tag">ResNet50</span>
+          <span class="tag">Transfer Learning</span>
+          <span class="tag">Librosa</span>
+        </div>
+      </div>
+
+      <!-- ML FROM SCRATCH -->
+      <div class="project-card">
+        <div class="card-header">
+          <div>
+            <div class="card-icon icon-orange">🌾</div>
+          </div>
+          <div class="card-links">
+            <a href="https://github.com/andreas430/ML_scratch" class="card-link" target="_blank" rel="noopener">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <div class="card-subtitle">From-scratch implementation · Regression</div>
+          <div class="card-title">ML Algorithms from Scratch — Crop Yield</div>
+        </div>
+
+        <p class="card-desc">
+          Four regression algorithms built entirely from scratch (no ML libraries) and applied to real-world maize crop yield prediction using 30 years of global climate data.
+        </p>
+
+        <!-- Visual: algorithm comparison dots -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin:0.5rem 0;">
+          <div style="background:var(--bg3);border-radius:8px;padding:0.75rem;text-align:center;">
+            <div style="font-size:1.1rem;margin-bottom:0.25rem;">📈</div>
+            <div style="font-size:0.75rem;font-weight:600;color:var(--text);">Linear Regression</div>
+            <div style="font-size:0.65rem;color:var(--text-dim);">multivariate</div>
+          </div>
+          <div style="background:var(--bg3);border-radius:8px;padding:0.75rem;text-align:center;">
+            <div style="font-size:1.1rem;margin-bottom:0.25rem;">🌲</div>
+            <div style="font-size:0.75rem;font-weight:600;color:var(--text);">Regression Forest</div>
+            <div style="font-size:0.65rem;color:var(--text-dim);">ensemble</div>
+          </div>
+          <div style="background:var(--bg3);border-radius:8px;padding:0.75rem;text-align:center;">
+            <div style="font-size:1.1rem;margin-bottom:0.25rem;">📊</div>
+            <div style="font-size:0.75rem;font-weight:600;color:var(--text);">Gaussian Process</div>
+            <div style="font-size:0.65rem;color:var(--text-dim);">probabilistic</div>
+          </div>
+          <div style="background:var(--bg3);border-radius:8px;padding:0.75rem;text-align:center;">
+            <div style="font-size:1.1rem;margin-bottom:0.25rem;">🔍</div>
+            <div style="font-size:0.75rem;font-weight:600;color:var(--text);">k-NN</div>
+            <div style="font-size:0.65rem;color:var(--text-dim);">instance-based</div>
+          </div>
+        </div>
+
+        <ul class="card-highlights">
+          <li>Input: rainfall, min/max temperature, year (30-year global dataset)</li>
+          <li>Target: maize yield (tonnes/hectare) across worldwide farms</li>
+          <li>Zero ML library usage — pure NumPy implementations</li>
+        </ul>
+
+        <div class="card-tags">
+          <span class="tag">Python</span>
+          <span class="tag">NumPy</span>
+          <span class="tag">Gaussian Process</span>
+          <span class="tag">k-NN</span>
+          <span class="tag">Random Forest</span>
+          <span class="tag">Regression</span>
+        </div>
+      </div>
+
+      <!-- SEARCH ENGINE -->
+      <div class="project-card">
+        <div class="card-header">
+          <div>
+            <div class="card-icon icon-pink">🔎</div>
+          </div>
+          <div class="card-links">
+            <a href="https://github.com/andreas430/Search-Engine" class="card-link" target="_blank" rel="noopener">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <div class="card-subtitle">Information Retrieval · Data Structures</div>
+          <div class="card-title">Inverted Index Search Engine</div>
+        </div>
+
+        <p class="card-desc">
+          A search engine built over a JSON recipe dataset using an inverted index — the same core data structure powering Elasticsearch and major search engines. Enables fast full-text lookups across structured JSON data.
+        </p>
+
+        <!-- Visual: index diagram -->
+        <div style="background:var(--bg3);border-radius:8px;padding:1rem;font-family:'SF Mono','Fira Code',monospace;font-size:0.72rem;color:var(--text-muted);line-height:1.8;">
+          <div><span style="color:var(--accent);">"pasta"</span> → [doc_3, doc_7, doc_12, ...]</div>
+          <div><span style="color:var(--accent);">"chicken"</span> → [doc_1, doc_4, doc_9, ...]</div>
+          <div><span style="color:var(--accent);">"garlic"</span> → [doc_2, doc_4, doc_7, ...]</div>
+          <div style="color:var(--text-dim);margin-top:0.5rem;">query("pasta AND garlic") → [doc_7]</div>
+        </div>
+
+        <ul class="card-highlights">
+          <li>Inverted index maps terms → document IDs for O(1) lookups</li>
+          <li>Supports boolean query expressions (AND/OR)</li>
+          <li>Applied to recipe JSON dataset for full-text ingredient search</li>
+        </ul>
+
+        <div class="card-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Inverted Index</span>
+          <span class="tag">Information Retrieval</span>
+          <span class="tag">JSON</span>
+          <span class="tag">Search</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- CTA -->
+  <section style="text-align:center;padding:4rem 2rem;">
+    <div class="section-label">// let's connect</div>
+    <h2 class="section-title" style="margin-bottom:1rem;">Interested in working together?</h2>
+    <p class="section-desc" style="margin:0 auto 2rem;">
+      I'm always open to interesting data engineering and ML projects. Check out my full CV or reach out directly.
+    </p>
+    <div class="hero-cta" style="justify-content:center;">
+      <a href="index.html" class="btn btn-primary">View Full CV</a>
+      <a href="index.html#contact" class="btn btn-secondary">Get in Touch</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>Built with care · <a href="index.html">Andreas Kafkalias</a> © 2026</p>
+  </footer>
+
+  <script>
+    // Animate bar charts on scroll
+    const barObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.algo-bar').forEach(bar => {
+            const target = bar.dataset.target;
+            bar.style.width = target + '%';
+          });
+          barObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('#tetris-chart, #breakout-chart').forEach(el => barObserver.observe(el));
+
+    // Generate waveform bars
+    const waveform = document.getElementById('waveform');
+    const heights = [20, 35, 55, 40, 60, 45, 30, 50, 65, 40, 55, 35, 60, 50, 30, 45, 55, 35, 50, 40];
+    heights.forEach((h, i) => {
+      const bar = document.createElement('div');
+      bar.className = 'wave-bar';
+      bar.style.height = h + 'px';
+      bar.style.animationDelay = (i * 0.07) + 's';
+      bar.style.animationDuration = (0.9 + Math.random() * 0.6) + 's';
+      waveform.appendChild(bar);
+    });
+  </script>
+</body>
+</html>
